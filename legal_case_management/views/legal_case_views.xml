@@ -1,0 +1,75 @@
+<odoo>
+    <!-- Window Actions -->
+    <record id="action_legal_cases" model="ir.actions.act_window">
+        <field name="name">Legal Cases</field>
+        <field name="res_model">legal.case</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_legal_hearings" model="ir.actions.act_window">
+        <field name="name">Legal Hearings</field>
+        <field name="res_model">legal.hearing</field>
+        <field name="view_mode">calendar,list,form</field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_legal_case_tree" model="ir.ui.view">
+        <field name="name">legal.case.tree</field>
+        <field name="model">legal.case</field>
+        <field name="arch" type="xml">
+            <list string="Legal Cases">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="responsible_lawyer_id"/>
+                <field name="case_type"/>
+                <field name="stage"/>
+                <field name="open_date"/>
+                <field name="close_date"/>
+                <field name="hearing_count"/>
+                <field name="invoice_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_legal_case_form" model="ir.ui.view">
+        <field name="name">legal.case.form</field>
+        <field name="model">legal.case</field>
+        <field name="arch" type="xml">
+            <form string="Legal Case">
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="client_id"/>
+                        <field name="responsible_lawyer_id"/>
+                        <field name="member_ids" widget="many2many_tags"/>
+                        <field name="case_type"/>
+                        <field name="stage" widget="statusbar" statusbar_visible="intake,active,closed"/>
+                        <field name="open_date"/>
+                        <field name="close_date"/>
+                        <field name="fixed_fee_amount"/>
+                    </group>
+                    <notebook>
+                        <page string="Hearings">
+                            <field name="hearing_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="status"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Documents">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="message_ids" widget="mail_thread"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button string="Close Case" type="object" name="action_close_case" class="btn-primary"/>
+                    <button string="Create Invoice" type="object" name="action_create_invoice"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

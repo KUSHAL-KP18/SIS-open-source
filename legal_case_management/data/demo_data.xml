@@ -1,0 +1,100 @@
+<odoo>
+  <record id="lawyer_1" model="res.partner">
+    <field name="name">Lawyer John Doe</field>
+    <field name="is_lawyer" eval="True"/>
+    <field name="bar_number">BAR12345</field>
+  </record>
+
+  <record id="lawyer_2" model="res.partner">
+    <field name="name">Lawyer Alice Smith</field>
+    <field name="is_lawyer" eval="True"/>
+    <field name="bar_number">BAR98765</field>
+  </record>
+
+  <record id="client_1" model="res.partner">
+    <field name="name">Client Jane Smith</field>
+    <field name="is_client" eval="True"/>
+  </record>
+
+  <record id="client_2" model="res.partner">
+    <field name="name">Client Bob Johnson</field>
+    <field name="is_client" eval="True"/>
+  </record>
+
+  <record id="client_3" model="res.partner">
+    <field name="name">Client Mary Williams</field>
+    <field name="is_client" eval="True"/>
+  </record>
+
+  <record id="case_1" model="legal.case">
+    <field name="name">CASE/2025/0001</field>
+    <field name="client_id" ref="client_1"/>
+    <field name="responsible_lawyer_id" ref="lawyer_1"/>
+    <field name="case_type">civil</field>
+    <field name="stage">active</field>
+    <field name="open_date">2025-09-01</field>
+    <field name="fixed_fee_amount">1500</field>
+    <field name="currency_id" ref="base.USD"/>
+  </record>
+
+  <record id="case_2" model="legal.case">
+    <field name="name">CASE/2025/0002</field>
+    <field name="client_id" ref="client_2"/>
+    <field name="responsible_lawyer_id" ref="lawyer_2"/>
+    <field name="case_type">criminal</field>
+    <field name="stage">active</field>
+    <field name="open_date">2025-08-15</field>
+    <field name="fixed_fee_amount">2000</field>
+    <field name="currency_id" ref="base.USD"/>
+  </record>
+
+  <record id="case_3" model="legal.case">
+    <field name="name">CASE/2024/0999</field>
+    <field name="client_id" ref="client_3"/>
+    <field name="responsible_lawyer_id" ref="lawyer_1"/>
+    <field name="case_type">civil</field>
+    <field name="stage">closed</field>
+    <field name="open_date">2024-01-10</field>
+    <field name="close_date">2024-06-15</field>
+    <field name="fixed_fee_amount">2500</field>
+    <field name="currency_id" ref="base.USD"/>
+  </record>
+
+  <!-- Hearings -->
+  <record id="hearing_1" model="legal.hearing">
+    <field name="case_id" ref="case_1"/>
+    <field name="name">Initial Hearing</field>
+    <field name="date_start">2025-09-10 10:00:00</field>
+    <field name="date_end">2025-09-10 11:00:00</field>
+    <field name="location">Courtroom 1</field>
+    <field name="status">scheduled</field>
+  </record>
+
+  <record id="hearing_2" model="legal.hearing">
+    <field name="case_id" ref="case_1"/>
+    <field name="name">Follow-up Hearing</field>
+    <field name="date_start">2025-09-25 14:00:00</field>
+    <field name="date_end">2025-09-25 15:00:00</field>
+    <field name="location">Courtroom 2</field>
+    <field name="status">scheduled</field>
+  </record>
+
+  <record id="hearing_3" model="legal.hearing">
+    <field name="case_id" ref="case_2"/>
+    <field name="name">Pre-trial Hearing</field>
+    <field name="date_start">2025-08-20 09:00:00</field>
+    <field name="date_end">2025-08-20 10:30:00</field>
+    <field name="location">Courtroom 3</field>
+    <field name="status">done</field>
+  </record>
+
+  <!-- Invoice linked to Case 1 -->
+  <record id="invoice_1" model="account.move">
+    <field name="move_type">out_invoice</field>
+    <field name="partner_id" ref="client_1"/>
+    <field name="invoice_date">2025-09-05</field>
+    <field name="state">draft</field>
+    <field name="legal_case_id" ref="case_1"/>
+    <field name="invoice_line_ids" eval="[(0, 0, {'name': 'Fixed Fee Legal Services', 'quantity': 1, 'price_unit': 1500})]"/>
+  </record>
+</odoo>

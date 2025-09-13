@@ -1,0 +1,37 @@
+<odoo>
+    <template id="case_summary_template">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Case Summary: <span t-esc="doc.name"/></h2>
+                <p><strong>Client:</strong> <span t-esc="doc.client_id.name"/></p>
+                <p><strong>Responsible Lawyer:</strong> <span t-esc="doc.responsible_lawyer_id.name"/></p>
+                <p><strong>Case Type:</strong> <span t-esc="doc.case_type"/></p>
+                <p><strong>Stage:</strong> <span t-esc="doc.stage"/></p>
+                <p><strong>Description:</strong></p>
+                <p><span t-esc="doc.description"/></p>
+
+                <h3>Hearings</h3>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr><th>Name</th><th>Start</th><th>End</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="doc.hearing_ids" t-as="h">
+                            <td><span t-esc="h.name"/></td>
+                            <td><span t-esc="h.date_start"/></td>
+                            <td><span t-esc="h.date_end"/></td>
+                            <td><span t-esc="h.status"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Documents</h3>
+                <ul>
+                    <li t-foreach="doc.message_attachment_ids" t-as="att">
+                        <span t-esc="att.name"/>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </template>
+</odoo>

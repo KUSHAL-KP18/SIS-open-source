@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_legal_hearing_list" model="ir.ui.view">
+        <field name="name">legal.hearing.list</field>
+        <field name="model">legal.hearing</field>
+        <field name="arch" type="xml">
+            <list string="Legal Hearings">
+                <field name="case_id"/>
+                <field name="name"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="location"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_legal_hearing_form" model="ir.ui.view">
+        <field name="name">legal.hearing.form</field>
+        <field name="model">legal.hearing</field>
+        <field name="arch" type="xml">
+            <form string="Legal Hearing">
+                <sheet>
+                    <group>
+                        <field name="case_id"/>
+                        <field name="name"/>
+                        <field name="date_start"/>
+                        <field name="date_end"/>
+                        <field name="location"/>
+                        <field name="status"/>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,18 @@
+<odoo>
+   <menuitem id="menu_legal_root" name="Legal"/>
+
+    <menuitem id="menu_legal_cases" name="Cases" parent="menu_legal_root" action="legal_case_management.action_legal_cases"/>
+    <menuitem id="menu_legal_hearings" name="Hearings" parent="menu_legal_root" action="legal_case_management.action_legal_hearings"/>
+
+    <record id="action_legal_cases" model="ir.actions.act_window">
+        <field name="name">Legal Cases</field>
+        <field name="res_model">legal.case</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_legal_hearings" model="ir.actions.act_window">
+        <field name="name">Legal Hearings</field>
+        <field name="res_model">legal.hearing</field>
+        <field name="view_mode">calendar,tree,form</field>
+    </record>
+</odoo>

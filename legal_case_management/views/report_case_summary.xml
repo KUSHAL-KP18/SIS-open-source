@@ -1,0 +1,10 @@
+<odoo>
+    <record id="action_report_case_summary" model="ir.actions.report">
+        <field name="name">Case Summary</field>
+        <field name="model">legal.case</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">legal_case_management.case_summary_template</field>
+        <field name="print_report_name">'Case_Summary_' + object.name</field>
+        <field name="binding_model_id" ref="model_legal_case"/>
+    </record>
+</odoo>
